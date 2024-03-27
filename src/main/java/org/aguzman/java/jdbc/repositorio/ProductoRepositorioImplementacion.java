@@ -27,11 +27,12 @@ public class ProductoRepositorioImplementacion implements Repositorio<Producto>
         List<Producto> listaProductos = new ArrayList<>();
 
         try(Statement stmt = getConnection().createStatement();
-            ResultSet resultado = stmt.executeQuery("SELECT * FROM productos"))
+            ResultSet resultado = stmt.executeQuery("SELECT * FROM productos"))//con Resulset ejecutamos
+        // la consulta y traemos los datos
         {
             while (resultado.next())
             {
-                Producto p = crearProducto(resultado);
+                Producto p = crearProducto(resultado);//le enviamos los datos de la ejecución de la consulta
                 listaProductos.add(p);
             }
         }
@@ -62,7 +63,7 @@ public class ProductoRepositorioImplementacion implements Repositorio<Producto>
             if(resultado.next()){
                 producto = crearProducto(resultado);
             }
-            resultado.close();
+            resultado.close();//cerramos la ejecución de la consulta
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -80,6 +81,11 @@ public class ProductoRepositorioImplementacion implements Repositorio<Producto>
 
     }
 
+    /**
+     *Método que crea un objeto producto. Recibe por parámetros un objeto
+     * Resulset que viene con los datos de la consulta y se los setiamos
+     * al objeto producto.
+     */
     private static Producto crearProducto(ResultSet resultado) throws SQLException {
         Producto p = new Producto();
         p.setId(resultado.getLong("id"));

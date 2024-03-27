@@ -19,7 +19,7 @@ public class EjemploJdbc {
             conexion = DriverManager.getConnection(url,userName,password);
             stmt = conexion.createStatement();
             //realizamos consulta:
-            resultado = stmt.executeQuery("SELECT * FROM productos");
+            resultado = stmt.executeQuery("SELECT * FROM productos");//trae los datos
 
             while (resultado.next())
             {
